@@ -10,6 +10,7 @@ class Dataset:
         self.padding_side = tokenizer_config.padding_side
         self.seed = seed
         self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_config.model_name)
+        self.tokenizer.chat_template = "{% for message in messages %}\n{% if message['role'] == 'user' %}\n{{ '<|user|>\n' + message['content'] + eos_token }}\n{% elif message['role'] == 'context' %}\n{{ '<|context|>\n' + message['content'] + eos_token }}\n{% elif message['role'] == 'system' %}\n{{ '<|system|>\n' + message['content'] + eos_token }}\n{% elif message['role'] == 'assistant' %}\n{{ '<|assistant|>\n'  + message['content'] + eos_token }}\n{% endif %}\n{% if loop.last and add_generation_prompt %}\n{{ '<|assistant|>' }}\n{% endif %}\n{% endfor %}"
         self.data = load_dataset(dataset_config.name,trust_remote_code=True)
 
     def generate_prompt(self,

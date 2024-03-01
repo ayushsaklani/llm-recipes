@@ -82,6 +82,7 @@ def prepare_trainer(model,data,tokenizer,train_args):
         tokenizer=tokenizer,
         args=training_arguments,
     )
+    return trainer
 
 def create_model_and_tokenizer(model_args,tokenizer_args):
     bnb_config = BitsAndBytesConfig(
@@ -99,6 +100,7 @@ def create_model_and_tokenizer(model_args,tokenizer_args):
     )
 
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_args.model_name)
+    tokenizer.chat_template = "{% for message in messages %}\n{% if message['role'] == 'user' %}\n{{ '<|user|>\n' + message['content'] + eos_token }}\n{% elif message['role'] == 'context' %}\n{{ '<|context|>\n' + message['content'] + eos_token }}\n{% elif message['role'] == 'system' %}\n{{ '<|system|>\n' + message['content'] + eos_token }}\n{% elif message['role'] == 'assistant' %}\n{{ '<|assistant|>\n'  + message['content'] + eos_token }}\n{% endif %}\n{% if loop.last and add_generation_prompt %}\n{{ '<|assistant|>' }}\n{% endif %}\n{% endfor %}"
     tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
 

@@ -1,5 +1,5 @@
 experiment: 
-  name: mistral-7b-chat-pdf-trail
+  name: mistral-7b-chat-pdf-trial-1
   model_save_name: mistral-7b-chat-pdf
   push_to_hub: True
   wandb_token: 9050e71c21d0cb99c585c969acf8bdcaff4c45bb
@@ -13,7 +13,7 @@ dataset:
   dataset_text_field: text
 
 tokenizer:
-  model_name: dyumat/mistral-7b-chat-pdf
+  model_name: mistralai/Mistral-7B-v0.1
   padding_side: right
   truncation_side: right
   pad_token_as_eos_token: True
