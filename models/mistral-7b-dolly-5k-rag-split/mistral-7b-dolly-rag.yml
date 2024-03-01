@@ -50,7 +50,7 @@ train:
   eval_steps: 0.5
   warmup_ratio: 0.05
   save_strategy: epoch
-  report_to: wanddb
+  report_to: wandb
   lr_scheduler: cosine
 
   
