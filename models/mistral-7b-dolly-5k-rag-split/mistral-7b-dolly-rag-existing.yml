@@ -1,13 +1,12 @@
 experiment: 
-  name: mistral-7b-chat-pdf-trial-1
-  model_save_name: mistral-7b-chat-pdf
+  name: mistral-7b-chat-pdf-v0.2
+  model_save_name: ../../mistral-7b-chat-pdf
   version: v0.2
-  push_to_hub: True
+  push_to_hub: False 
   wandb_token: 9050e71c21d0cb99c585c969acf8bdcaff4c45bb
 
 model:
-  name: mistral-7b-chat-pdf
-  version: Null
+  name: ../../mistral-7b-chat-pdf
   torch_dtype: bfloat16 
 
 dataset:
@@ -15,7 +14,7 @@ dataset:
   dataset_text_field: text
 
 tokenizer:
-  model_name: mistral-7b-chat-pdf
+  model_name: ../../mistral-7b-chat-pdf
   padding_side: right
   truncation_side: right
   pad_token_as_eos_token: True

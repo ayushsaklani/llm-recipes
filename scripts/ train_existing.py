@@ -79,7 +79,7 @@ def prepare_trainer(model,data,tokenizer,train_args):
         eval_dataset=data["validation"],
         peft_config=peft_config,
         dataset_text_field="text",
-        max_seq_length=4096,
+        max_seq_length=train_args.max_seq_length,
         tokenizer=tokenizer,
         args=training_arguments,
     )
@@ -135,8 +135,8 @@ def main(config_path:str):
     trainer.save_model()
 
     model = merge_quantized_model(config.train)
-    model.save_pretrained(config.experiment.model_save_name, safe_serialization=True)
-    tokenizer.save_pretrained(config.experiment.model_save_name)
+    model.save_pretrained(config.model.name safe_serialization=True)
+    tokenizer.save_pretrained(config.model.name)
 
     if config.experiment.push_to_hub:
         model.push_to_hub(config.experiment.model_save_name)
